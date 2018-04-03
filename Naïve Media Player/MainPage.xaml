@@ -8,6 +8,11 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+        <StackPanel Orientation="Vertical">
+            <TextBlock Name="text" Text="Naïve Media Player" FontSize="48" Margin="120,0,0,0"></TextBlock>
+            <Button Content="选择文件" Click="Button_Click_1" FontSize="36" Margin="120,48,0,0"></Button>
+            <MediaElement Name="play" AutoPlay="False" AreTransportControlsEnabled="True">
+            </MediaElement>
+        </StackPanel>
     </Grid>
 </Page>

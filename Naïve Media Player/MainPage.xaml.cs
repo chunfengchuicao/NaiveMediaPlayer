@@ -26,5 +26,23 @@ namespace Naïve_Media_Player
         {
             this.InitializeComponent();
         }
+        
+
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
+
+            openPicker.FileTypeFilter.Add(".mp4");
+            openPicker.FileTypeFilter.Add(".mp3");
+
+            var file = await openPicker.PickSingleFileAsync();
+            if (file != null)
+            {
+                var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
+                play.SetSource(stream, file.ContentType);
+
+                play.Play();
+            }
+        }
     }
 }
