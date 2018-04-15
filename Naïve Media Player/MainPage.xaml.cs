@@ -5,6 +5,10 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Media.Core;
+using Windows.Media.Playback;
+using Windows.Networking.BackgroundTransfer;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -43,6 +47,25 @@ namespace Naïve_Media_Player
 
                 play.Play();
             }
+        }
+
+        private void playOnline_Click(object sender, RoutedEventArgs e)
+        {
+            var mediaPlayer = new MediaPlayer();
+            mediaPlayer.Source = MediaSource.CreateFromUri(new Uri("http://www.neu.edu.cn/indexsource/neusong.mp3"));
+            mediaPlayer.Play();
+        }
+
+        private async void download_Click(object sender, RoutedEventArgs e)
+        {
+            Uri source = new Uri(serverAddressField.Text.Trim());
+            string destination = fileNameField.Text.Trim();
+
+            StorageFile destinationFile = await KnownFolders.MusicLibrary.CreateFileAsync(
+                destination, CreationCollisionOption.GenerateUniqueName);
+            BackgroundDownloader downloader = new BackgroundDownloader();
+            DownloadOperation download = downloader.CreateDownload(source, destinationFile);
+            await download.StartAsync();
         }
     }
 }

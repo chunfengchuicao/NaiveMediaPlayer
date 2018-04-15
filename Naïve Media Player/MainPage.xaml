@@ -10,7 +10,13 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel Orientation="Vertical">
             <TextBlock Name="text" Text="Naïve Media Player" FontSize="48" Margin="120,0,0,0"></TextBlock>
-            <Button Content="选择文件" Click="Button_Click_1" FontSize="36" Margin="120,48,0,0"></Button>
+            <StackPanel Orientation="Horizontal">
+                <TextBox Name="serverAddressField" FontSize="80" Width="400" Text="URI"></TextBox>
+                <TextBox Name="fileNameField" FontSize="80" Text="文件名称" Margin="60,0,0,0"></TextBox>
+                <Button Name="playOnline" Content="在线播放" FontSize="80" Click="playOnline_Click" Margin="60,0,0,0"></Button>
+                <Button x:Name="download" Content="缓存" FontSize="80" Margin="60,0,0,0" Click="download_Click"/>
+            </StackPanel>
+            <Button Content="选择文件本地播放" Click="Button_Click_1" FontSize="36" Margin="120,48,0,0"></Button>
             <MediaElement Name="play" AutoPlay="False" AreTransportControlsEnabled="True">
             </MediaElement>
         </StackPanel>
